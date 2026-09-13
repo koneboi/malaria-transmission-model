@@ -57,7 +57,10 @@ malaria-transmission-model/
 │   ├── 01_ross_macdonald_sim.py        # Equilibrium sim + plots
 │   ├── 02_seasonal_transmission_mali.py# Sahel seasonality, 3-yr curves
 │   ├── 03_ITN_IRS_impact.py            # Coverage sweeps + contour maps
-│   └── 04_seasonal_chemoprevention.py  # SMC impact in the rainy season
+│   ├── 04_seasonal_chemoprevention.py  # SMC impact in the rainy season
+│   └── 05_real_malaria_analysis.py     # Real WHO data: Mali case study
+├── data/
+│   └── real/                           # Downloaded WHO/OWID malaria data
 └── output/                    # Generated PNG figures
 ```
 
@@ -91,8 +94,22 @@ python scripts/04_seasonal_chemoprevention.py
 ```
 
 Each script prints an interpretative summary to the console and saves 2–3
-publication-quality PNG figures into `output/`. All simulations are fully synthetic
+publication-quality PNG figures into `output/`. Scripts 01–04 are fully synthetic
 (deterministic ODE integration / Monte-Carlo) so they run offline without any downloads.
+
+### 5. Real-world analysis (Mali, WHO data)
+
+```bash
+# Download WHO malaria incidence data and run analysis
+python scripts/download_real_data.py
+python scripts/05_real_malaria_analysis.py
+```
+
+This script downloads real WHO malaria incidence data for Mali (2000–2024) from
+[Our World in Data](https://ourworldindata.org/grapher/incidence-of-malaria),
+analyses the 25-year trend, calibrates the SEIR-SEI model to match observed burden,
+computes the implied R0, and produces 4 publication-quality figures. See
+[RESULTS.md](RESULTS.md) for full findings, data source, and interpretation.
 
 ## Parameterisation rationale
 
